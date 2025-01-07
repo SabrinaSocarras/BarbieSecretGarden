@@ -12,10 +12,13 @@ public class ChangeSpeed : Skill
     public int Change { get; }
     public override void Execute(Game game)
     {
-        if (Change < 0)
+        if (!Used)
         {
-            game.CurrenPlayer.Opponent.Piece.Speed += Change;
+            if (Change < 0)
+            {
+                game.CurrenPlayer.Opponent.Piece.Speed += Change;
+            }
+            else game.CurrenPlayer.Piece.Speed += Change;
         }
-        else game.CurrenPlayer.Piece.Speed += Change;
     }
 }

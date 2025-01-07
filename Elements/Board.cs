@@ -3,6 +3,7 @@ namespace AtrapaABarbie;
 
 public class Board
 {
+    public Place End { get; set; }
     public Place[,] Cells { get; set; } = null!;
     public Board(int n)
     {
