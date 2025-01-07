@@ -9,12 +9,12 @@ public static class Program
         {
             for (int j = 0; j < 10; j++)
             {
-                if (board.Places[i,j].Obstacule)
+                if (board.Cells[i,j].Obstacule)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                 }
                 else Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.Write(board.Places[i,j].Obstacule + " ");
+                System.Console.Write(board.Cells[i,j].Obstacule + " ");
             }
             System.Console.WriteLine();
         }

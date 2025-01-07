@@ -3,15 +3,15 @@ namespace AtrapaABarbie;
 
 public class Board
 {
-    public Place[,] Places { get; set; } = null!;
+    public Place[,] Cells { get; set; } = null!;
     public Board(int n)
     {
-        Places = new Place[n, n];
+        Cells = new Place[n, n];
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                Places[i, j] = new Place
+                Cells[i, j] = new Place 
                 {
                     X = i,
                     Y = j,
@@ -19,8 +19,8 @@ public class Board
                 };
             }
         }
-        Places[0, 0].Obstacule = false;
-        BuildBoard(Places);
+        Cells[0, 0].Obstacule = false;
+        BuildBoard(Cells);
     }
 
     private void BuildBoard(Place[,] board)
