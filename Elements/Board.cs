@@ -11,7 +11,7 @@ public class Board
         {
             for (int j = 0; j < n; j++)
             {
-                Cells[i, j] = new Place 
+                Cells[i, j] = new Place
                 {
                     X = i,
                     Y = j,
@@ -27,7 +27,7 @@ public class Board
     {
         List<Place> places = new List<Place>();
         places.Add(board[0, 0]);
-        
+
         Place final = places.Last();
         while (places.Count > 0)
         {
@@ -41,14 +41,14 @@ public class Board
                 int ny = current.Y + dir.Item2;
                 if (nx >= 0 && nx < board.GetLength(0) && ny >= 0 && ny < board.GetLength(1) && board[nx, ny].Obstacule)
                 {
-                    board[nx,ny].Obstacule = false;
-                    places.Add(board[nx,ny]);
+                    board[nx, ny].Obstacule = false;
+                    places.Add(board[nx, ny]);
                     break;
                 }
             }
         }
     }
-    private void Shuffle(List<(int,int)> places)
+    private void Shuffle(List<(int, int)> places)
     {
         Random r = new Random();
         int n = places.Count;
@@ -56,7 +56,7 @@ public class Board
         {
             n--;
             int k = r.Next(n + 1);
-            (int,int) p = places[k];
+            (int, int) p = places[k];
             places[k] = places[n];
             places[n] = p;
         }

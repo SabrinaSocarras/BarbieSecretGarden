@@ -1,8 +1,8 @@
 namespace AtrapaABarbie;
 
-public class IncreaseSpeed : Skill
+public class ChangeSpeed : Skill
 {
-    public IncreaseSpeed(int change)
+    public ChangeSpeed(int change)
     {
         Change = change;
         Type = SkillType.ChangeSpeed;

@@ -1,22 +1,35 @@
-﻿namespace AtrapaABarbie;
+﻿using System;
+using Spectre.Console;
 
-public static class Program
+class Program
 {
     static void Main(string[] args)
     {
-        Board board = new Board(10);
-        for (int i = 0; i < 10; i++)
+        // Definir el laberinto
+        char[,] maze = {
+            { '#', '#', '#', '#', '#', '#' },
+            { '#', ' ', ' ', ' ', ' ', '#' },
+            { '#', ' ', '#', '#', ' ', '#' },
+            { '#', ' ', '#', ' ', ' ', '#' },
+            { '#', ' ', ' ', ' ', '#', '#' },
+            { '#', '#', '#', '#', '#', '#' }
+        };
+
+        // Dibujar el laberinto
+        for (int i = 0; i < maze.GetLength(0); i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < maze.GetLength(1); j++)
             {
-                if (board.Cells[i,j].Obstacule)
+                if (maze[i, j] == '#')
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    AnsiConsole.Markup("[blue]█[/]");
                 }
-                else Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.Write(board.Cells[i,j].Obstacule + " ");
+                else
+                {
+                    AnsiConsole.Markup("[white]█[/]");
+                }
             }
-            System.Console.WriteLine();
+            AnsiConsole.WriteLine();
         }
     }
 }

@@ -2,6 +2,6 @@ namespace AtrapaABarbie
 {
     public enum PlaceType
     {
-        None, Final,
+        None, Final,ReturnToStart,
     }
 }
