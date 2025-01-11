@@ -1,10 +1,13 @@
 ﻿using System;
+using AtrapaABarbie;
 using Spectre.Console;
 
-class Program
-{
+
+public static class Program
+{  
     static void Main(string[] args)
     {
+        MainMenu.ShowMenu();
         // Definir el laberinto
         char[,] maze = {
             { '#', '#', '#', '#', '#', '#' },

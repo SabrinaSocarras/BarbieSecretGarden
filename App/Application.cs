@@ -2,11 +2,14 @@ namespace AtrapaABarbie;
 
 public class Application
 {
-    public Game game {get; set;} = null!;
+    public Game game { get; set; } = null!;
     public void Start()
     {
-        //Inicializar OBJETOS 
-        //Crear, tablero, piezas, jugadores y Game
+        Board board = new Board(6);
+        Player player = new Player();
+        Game game = new Game();
+        Piece piece = new Piece();
+
     }
     public string PlayGame()
     {
@@ -37,42 +40,61 @@ public class Application
                 return PlayerAction.Mover;
             case ConsoleKey.A:
                 return PlayerAction.Activar;
-            default: 
-                return GetAction();
+            default:
+                return GetAction();  //si elige otra opcion vuelve a llamar al metodo 
         }
     }
     private int SelectSkill(Piece piece)
     {
-        /*
-            int value = int.MaxValue
-            while(value > piece.Skills.Count)
+        int value = int.MaxValue;
+        while (value > piece.Skills.Count)
+        {
+            ConsoleKeyInfo consoleKey = Console.ReadKey();
+            switch (consoleKey.Key)
             {
-                pedir un consoleKey
-                swith(consoleKey.Key)
-                    case D1:                  Di = i - 1
-                        value = 0;
-                        break;
-                    default:
-                        break;
+                case ConsoleKey.D0:
+                    value = 0;
+                    break;
+                case ConsoleKey.D1:
+                    value = 1;
+                    break;
+                case ConsoleKey.D2:
+                    value = 2;
+                    break;
+                case ConsoleKey.D3:
+                    value = 3;
+                    break;
+                case ConsoleKey.D4:
+                    value = 4;
+                    break;
+                case ConsoleKey.D5:
+                    value = 5;
+                    break;
+                case ConsoleKey.D6:
+                    value = 6;
+                    break;
+                case ConsoleKey.D7:
+                    value = 7;
+                    break;
+                case ConsoleKey.D8:
+                    value = 8;
+                    break;
+                case ConsoleKey.D9:
+                    value = 9;
+                    break;    
+
+                default:
+                    break;
             }
             return value;
-        */
-        ConsoleKeyInfo consoleKey = Console.ReadKey();
-        while (true)
-        {
-            if (Utils.TranslateNumber.TryGetValue(consoleKey.Key, out int value) && value < piece.Skills.Count)
-            {
-                return value;
-            }
-            else
-            {
-                ShowMassage("Invalid value for the skill");
-                consoleKey = Console.ReadKey();
-            }
         }
+        return value;
     }
-    private void ShowMassage(string massage)
+    private void ShowMassage(string massage) //creando un metodo para no tener que repetir tanto Console.WriteLine 
     {
         System.Console.WriteLine(massage);
     }
+
 }
+
+
