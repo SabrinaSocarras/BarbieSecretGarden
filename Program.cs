@@ -25,11 +25,11 @@ public static class Program
             {
                 if (maze[i, j] == '#')
                 {
-                    AnsiConsole.Markup("[blue]█[/]");
+                    AnsiConsole.Markup("[green]█[/]");
                 }
                 else
                 {
-                    AnsiConsole.Markup("[white]█[/]");
+                    AnsiConsole.Markup("[bold pink1]█[/]");
                 }
             }
             AnsiConsole.WriteLine();

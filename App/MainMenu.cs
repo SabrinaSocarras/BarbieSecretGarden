@@ -6,7 +6,7 @@ public static class MainMenu
     public static void ShowMenu()
     {
         // Título "Barbie" en grande y rosado
-        AnsiConsole.MarkupLine("[bold pink1]Barbie[/]");
+        AnsiConsole.MarkupLine("[bold pink1]Welcome to the Secret Garden of Barbie[/]");
 
         // Opciones del menú
         var option = AnsiConsole.Prompt(

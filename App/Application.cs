@@ -8,8 +8,6 @@ public class Application
         Board board = new Board(6);
         Player player = new Player();
         Game game = new Game();
-        Piece piece = new Piece();
-
     }
     public string PlayGame()
     {
@@ -47,7 +45,7 @@ public class Application
     private int SelectSkill(Piece piece)
     {
         int value = int.MaxValue;
-        while (value > piece.Skills.Count)
+        while (value > piece.Skills.Length)
         {
             ConsoleKeyInfo consoleKey = Console.ReadKey();
             switch (consoleKey.Key)
@@ -81,12 +79,11 @@ public class Application
                     break;
                 case ConsoleKey.D9:
                     value = 9;
-                    break;    
+                    break;
 
                 default:
                     break;
             }
-            return value;
         }
         return value;
     }
@@ -95,6 +92,37 @@ public class Application
         System.Console.WriteLine(massage);
     }
 
+    public void Movement(Piece piece)
+    {
+        int speed = piece.Speed;
+        if (!piece.Moved)
+        {
+            while (speed > 0)
+            {
+                ConsoleKeyInfo consoleKey = Console.ReadKey();
+                switch (consoleKey.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (piece.Movement(game, -1, 0)) { }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        //Mover Abajo
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        //Mover Izquierda
+                        break;
+                    case ConsoleKey.RightArrow:
+                        //Mover Derecha
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+    }
+    public void PrintBoard()
+    {
+
+    }
 }
-
-
