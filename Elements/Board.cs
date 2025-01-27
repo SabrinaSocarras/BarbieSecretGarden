@@ -3,63 +3,75 @@ namespace AtrapaABarbie;
 
 public class Board
 {
-    public Place End { get; set; }
-    public Place[,] Cells { get; set; } = null!;
-    public Board(int n)
+    public int Size { get;} 
+    public Cell[,] Cells {get; }
+
+    public Board (int size )
     {
-        Cells = new Place[n, n];
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                Cells[i, j] = new Place
-                {
-                    X = i,
-                    Y = j,
-                    Obstacule = true,
-                };
-            }
-        }
-        Cells[0, 0].Obstacule = false;
-        BuildBoard(Cells);
+        Size = size;
+        Cells = new Cell[size,size];
+        InitializeBoard();
+        //AddRandomTraps();
+
+        MakeBoardAccesible(); 
+
     }
 
-    private void BuildBoard(Place[,] board)
+    private void MakeBoardAccesible()
     {
-        List<Place> places = new List<Place>();
-        places.Add(board[0, 0]);
-
-        Place final = places.Last();
-        while (places.Count > 0)
+        for (int i = 0; i < Size; i++)
         {
-            Place current = places.Last();
-            places.RemoveAt(places.Count - 1);
-            List<(int, int)> directions = new List<(int, int)> { (1, 0), (-1, 0), (0, 1), (0, -1) };
-            Shuffle(directions);
-            foreach (var dir in directions)
+            for (int j = 0; j < Size; j++)
             {
-                int nx = current.X + dir.Item1;
-                int ny = current.Y + dir.Item2;
-                if (nx >= 0 && nx < board.GetLength(0) && ny >= 0 && ny < board.GetLength(1) && board[nx, ny].Obstacule)
+                if (Cells[i,j].Type == CellType.Wall)
                 {
-                    board[nx, ny].Obstacule = false;
-                    places.Add(board[nx, ny]);
-                    break;
+                    Cells[i,j].Type = CellType.Path;
                 }
             }
         }
     }
-    private void Shuffle(List<(int, int)> places)
+
+    private void InitializeBoard()
     {
-        Random r = new Random();
-        int n = places.Count;
-        while (n > 1)
+        for (int i = 0; i < Size; i++)
         {
-            n--;
-            int k = r.Next(n + 1);
-            (int, int) p = places[k];
-            places[k] = places[n];
-            places[n] = p;
+            for (int j = 0; j < Size; j++)
+            {
+                Cells[i,j] = new Cell(i,j);
+            }
         }
     }
+     private void GenerateMaze()
+     {
+        Random rand = new Random();
+        int StartX = rand.Next(0,Size);
+        int StartY = rand.Next(0,Size);
+
+        Cells[StartX,StartY].Type = CellType.Path;
+     }
+
+   
+   private List <(int x, int y)> GetNeighbors(int x, int y)
+   {
+       List<(int , int )> neighbors = new List<(int , int )>();
+       if (x > 0)
+       {
+           neighbors.Add((x-1,y));
+       }
+       if (x < Size - 1)
+       {
+           neighbors.Add((x+1,y));
+       }
+       if (y > 0)
+       {
+           neighbors.Add((x,y-1));
+       }
+       if (y < Size - 1)
+       {
+           neighbors.Add((x,y+1));
+       }
+       return neighbors;
+   }
+
+   
 }

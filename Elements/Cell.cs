@@ -1,12 +1,12 @@
 namespace AtrapaABarbie;
 
-public struct Place
+public struct Cell
 {
-    public Place() { }
+    public Cell() { }
     public int X { get; set; }
     public int Y { get; set; }
     public bool Obstacule { get; set; }
-    public PlaceType Type { get; set; } = PlaceType.None;
+    public CellType Type { get; set; } = CellType.None;
 
     public override string ToString()
     {
