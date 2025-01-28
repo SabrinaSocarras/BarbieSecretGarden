@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class InvalidTrap : Skill 
+public class InvalidTrap : Skil
 {
     public InvalidTrap( )
     {

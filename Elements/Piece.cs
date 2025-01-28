@@ -2,19 +2,22 @@ namespace AtrapaABarbie;
 
 public class Piece
 {
-    public Piece(string name, string logo ,int speed, params Skill[] skills)
+    public Piece(string name, int speed, Skill skill, string logo)
     {
-        Name = name;
         Logo = logo;
+        Name = name;
+        Logo = "o";
         Speed = speed;
         _speed = speed;
+        Skill = skill;
     }
 
     public string Name { get; private set; } = String.Empty;
     public string Logo { get; private set; }
     public int Speed { get; set; }
+    public int Time { get; set; }
     private int _speed { get; set; }
-    public Skill[] Skills { get; } = [];
+    public Skill Skill { get; }
     public bool Moved { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
@@ -28,9 +31,6 @@ public class Piece
     {
         Speed = _speed;
         Moved = false;
-        foreach (var skill in Skills)
-        {
-            skill.Used = false;
-        }
+        Skill.Used = false;
     }
 }

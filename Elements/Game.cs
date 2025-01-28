@@ -8,6 +8,6 @@ public class Game
 
     public bool Winner()
     {
-        return CurrenPlayer.Piece.X == Board.End.X && CurrenPlayer.Piece.Y == Board.End.Y; //saber cuando el jugador llego a la casilla final
+        return CurrenPlayer.Piece.X == Board.Exit.X && CurrenPlayer.Piece.Y == Board.Exit.Y;
     }
 }

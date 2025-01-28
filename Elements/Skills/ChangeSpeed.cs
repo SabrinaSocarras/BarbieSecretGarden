@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class ChangeSpeed : Skill
+public class ChangeSpeed : Skil
 {
     public ChangeSpeed(int change)
     {

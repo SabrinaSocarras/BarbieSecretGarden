@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class PutTrap: Skill 
+public class PutTrap: Skil
 {
     public PutTrap ( )
     {

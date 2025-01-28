@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class Skill
+public class Skil
 {
     public int Time { get; set; }
     private int _time;

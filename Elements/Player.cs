@@ -8,6 +8,6 @@ public class Player
 
     public void ActivateSkill(Game game, int skill)
     {
-        Piece.Skills[skill].Execute(game);
+        // Piece.Skill
     }
 }
