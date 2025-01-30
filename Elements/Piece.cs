@@ -2,7 +2,7 @@ namespace AtrapaABarbie;
 
 public class Piece
 {
-    public Piece(string name, int speed, Skill skill, string logo, int time)
+    public Piece(string name, int speed, Skill skill, string logo)
     {
         Logo = logo;
         Name = name;
@@ -10,13 +10,11 @@ public class Piece
         Speed = speed;
         _speed = speed;
         Skill = skill;
-        Time = time;
     }
 
     public string Name { get; private set; } = String.Empty;
     public string Logo { get; private set; }
     public int Speed { get; set; }
-    public int Time { get; set; }
     private int _speed { get; set; }
     public Skill Skill { get; }
     public bool Moved { get; set; }

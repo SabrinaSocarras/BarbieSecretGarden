@@ -39,8 +39,9 @@ public class Application
             PlayerAction action = PrintActions();
             if (action == PlayerAction.Activar)
             {
-                Skill skill = game.CurrenPlayer.Piece.Skill;
-                // game.CurrenPlayer.Piece.Skills[skill].Execute(game);
+                game.CurrenPlayer.Piece.Skill.Execute(game);
+                Console.WriteLine($"{game.CurrenPlayer.Name}ha activado su habilidad {game.CurrenPlayer.Piece.Skill.Name}.");
+                Thread.Sleep(2000);
             }
             else if (action == PlayerAction.Salir)
             {
@@ -101,6 +102,27 @@ public class Application
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                     break;
                 }
+                if (game.HasSpeedReduction(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
+                {
+                    speed /= 2;
+                    Console.WriteLine("");
+                    AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has a speed reduction trap.[/]");
+                    Thread.Sleep(2000);
+                    game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
+                    break;
+                }
+
+                if(game.hasReturnToStart(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
+                {
+                    Console.WriteLine("");
+                    AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has fallen into a trap and returns to the start.[/]");
+                    Thread.Sleep(2000);
+                    game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
+                    game.CurrenPlayer.Piece.X = game.Board.Start.X;
+                    game.CurrenPlayer.Piece.Y = game.Board.Start.Y;
+                    break;
+                }
+
                 ConsoleKeyInfo consoleKey = Console.ReadKey();
                 switch (consoleKey.Key)
                 {
@@ -170,7 +192,8 @@ public class Application
                 {
                     if (player.Piece.X == i && player.Piece.Y == j)
                     {
-                        AnsiConsole.Markup($"[black]█[/]");
+                        AnsiConsole.Markup($"[black]██[/]");
+                        
                         playerInCell = true;
                         break;
                     }
@@ -180,19 +203,19 @@ public class Application
                 {
                     if (game.Board.Cells[i, j].Type == CellType.Wall)
                     {
-                        AnsiConsole.Markup("[green]█[/]");
+                        AnsiConsole.Markup("[green]██[/]");
                     }
                     else if (game.Board.Cells[i, j].Type == CellType.Final)
                     {
-                        AnsiConsole.Markup("[blue]|[/]");
+                        AnsiConsole.Markup("[blue]||[/]");
                     }
-                    else if (game.Board.Cells[i, j].Type == CellType.StayInPlace || game.Board.Cells[i, j].Type == CellType.ReturnToStart)
+                    else if (game.Board.Cells[i, j].Type == CellType.SpeedReduction || game.Board.Cells[i, j].Type == CellType.ReturnToStart || game.Board.Cells[i, j].Type == CellType.StayInPlace )
                     {
-                        AnsiConsole.Markup("[red]█[/]");
+                        AnsiConsole.Markup("[red]██[/]");
                     }
                     else
                     {
-                        AnsiConsole.Markup("[bold pink1]█[/]");
+                        AnsiConsole.Markup("[bold pink1]██[/]");
                     }
 
                 }

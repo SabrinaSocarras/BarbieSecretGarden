@@ -41,15 +41,15 @@ public class PieceSelector
         switch (option)
         {
             case "Barbie Star":
-                return new Piece("Barbie Star", 10, new Skill("Star Glow", 3, "Allows jumping over obstacles or traps, moving up to 2 additional cells in a straight line."), "👩", 2);
+                return new Piece("Barbie Star", 10, new CrystalSpell(), "👩");
             case "Ken Adventurer":
-                return new Piece("Ken Adventurer", 3, new Skill("Protective Shield", 4, "Launches a hook to move to any cell in a straight line within a 5-cell radius, ignoring obstacles."), "👨", 2);
+                return new Piece("Ken Adventurer", 3, new ProtectiveShield(),"👨");
             case "Skipper Inventor":
-                return new Piece("Skipper Inventor", 2, new Skill("Reversible Drone", 2, "Converts a trap into a benefit cell (e.g., grants an extra move) for 1 turn."), "👩‍🔧", 2);
+                // return new Piece("Skipper Inventor", 2, new Skill("Reversible Drone", 2, "Converts a trap into a benefit cell (e.g., grants an extra move) for 1 turn."), "👩‍🔧", 2);
             case "Stacie Detective":    
-                return new Piece("Stacie Detective", 3, new Skill("Crystal Spell", 5, "Teleports randomly to another cell"), "🧙‍♀️", 2);
+                return new Piece("Stacie Detective", 10, new CrystalSpell(), "👩");
             case "Chelsea Explorer":
-                return new Piece("Chelsea Explorer", 5, new Skill("Speed Ray", 3, "Allows double speed movement for 1 turn, but abilities cannot be used during that turn."), "👧", 2);
+                // return new Piece("Chelsea Explorer", 5, new Skill("Speed Ray", 3, "Allows double speed movement for 1 turn, but abilities cannot be used during that turn."), "👧", 2);
             default:
                 return ShowMenu(name, selectedPiece);
         }

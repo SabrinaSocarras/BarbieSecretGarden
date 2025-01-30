@@ -138,13 +138,13 @@ public class Board
                 y = rand.Next(0, Size);
             }
 
-            Cells[x, y].Type = CellType.StayInPlace;
+            Cells[x, y].Type = CellType.SpeedReduction;
         }
         for (int i = 0; i < traps; i++)
         {
             int x = rand.Next(0, Size);
             int y = rand.Next(0, Size);
-            while (Cells[x, y].Type == CellType.Wall || Cells[x, y].Type == CellType.Start || Cells[x, y].Type == CellType.Final || Cells[x, y].Type == CellType.StayInPlace)
+            while (Cells[x, y].Type == CellType.Wall || Cells[x, y].Type == CellType.Start || Cells[x, y].Type == CellType.Final || Cells[x, y].Type == CellType.SpeedReduction)
             {
                 x = rand.Next(0, Size);
                 y = rand.Next(0, Size);
@@ -152,7 +152,18 @@ public class Board
 
             Cells[x, y].Type = CellType.ReturnToStart;
         }
+        for (int i = 0; i < traps; i++)
+        {
+            int x = rand.Next(0, Size);
+            int y = rand.Next(0, Size);
+            while (Cells[x, y].Type == CellType.Wall || Cells[x, y].Type == CellType.Start || Cells[x, y].Type == CellType.Final || Cells[x, y].Type == CellType.SpeedReduction|| Cells[x,y].Type == CellType.ReturnToStart)
+            {
+                x = rand.Next(0, Size);
+                y = rand.Next(0, Size);
+            }
+
+            Cells[x, y].Type = CellType.StayInPlace;
     }
 
-
+    }
 }

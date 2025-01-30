@@ -23,6 +23,17 @@ public class Game
         return Board.Cells[x, y].Type == CellType.StayInPlace;
     }
 
+    public bool HasSpeedReduction(int x, int y)
+    {
+        return Board.Cells[x, y].Type == CellType.SpeedReduction;
+    }
+    
+    public bool hasReturnToStart(int x, int y)
+    {
+        return Board.Cells[x, y].Type == CellType.ReturnToStart;
+    }
+    
+
     public void ChangePlayer()
     {
         if (Players.IndexOf(CurrenPlayer) == Players.Count - 1)

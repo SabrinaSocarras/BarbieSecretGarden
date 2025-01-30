@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class SpeedRay : Skil
+public class SpeedRay : Skill
 {
     public SpeedRay()
     {

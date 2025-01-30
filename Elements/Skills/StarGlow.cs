@@ -1,6 +1,6 @@
 namespace AtrapaABarbie;
 
-public class StarGlow : Skil
+public class StarGlow : Skill
 {
     public StarGlow( )
     {
