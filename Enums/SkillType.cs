@@ -2,5 +2,5 @@ namespace AtrapaABarbie;
 
 public enum SkillType
 {
-    ChangeSpeed, DoubleTurn, InvalidTrap, PutTrap 
+    StarGlow, ProtectiveShield, ReversibleDrone, CrystalSpell, SpeedRay
 }

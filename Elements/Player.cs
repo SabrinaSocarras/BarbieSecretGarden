@@ -6,8 +6,4 @@ public class Player
     public Player Opponent { get; set; } = null!;
     public Piece Piece { get; set; } = null!;
 
-    public void ActivateSkill(Game game, int skill)
-    {
-        // Piece.Skill
-    }
 }

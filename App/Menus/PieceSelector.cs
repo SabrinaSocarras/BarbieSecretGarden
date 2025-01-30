@@ -3,56 +3,53 @@ using Spectre.Console;
 namespace AtrapaABarbie;
 public class PieceSelector
 {
-
     public Piece ShowMenu(string name, List<Piece> selectedPiece)
     {
         Console.WriteLine("");
         var table = new Table()
                .Border(TableBorder.Heavy)
-               .AddColumn(new TableColumn("[bold]Ficha[/]").Centered())
-               .AddColumn(new TableColumn("[bold]Habilidad[/]").Centered())
-               .AddColumn(new TableColumn("[bold]Descripción[/]").Centered());	
+               .AddColumn(new TableColumn("[bold]Piece[/]").Centered())
+               .AddColumn(new TableColumn("[bold]Ability[/]").Centered())
+               .AddColumn(new TableColumn("[bold]Description[/]").Centered());	
 
-        table.AddRow("Barbie Estrella", "Brillo Estelar", "Permite saltar sobre un obstáculo o trampa.");
+        table.AddRow("Barbie Star", "Star Glow", "Allows jumping over an obstacle or trap.");
         table.AddRow(new Rule(), new Rule(), new Rule());
-        table.AddRow("Ken Aventurero", "Escudo Protector", "Permite moverse en un radio de 5 casillas en línea recta.");
+        table.AddRow("Ken Adventurer", "Protective Shield", "Allows movement in a 5-cell straight line radius.");
         table.AddRow(new Rule(), new Rule(), new Rule());
-        table.AddRow("Skipper Inventora", "Dron Explorador", "Convierte una trampa en un turno extra.");
+        table.AddRow("Skipper Inventor", "Reversible Drone", "Converts a trap into an extra turn.");
         table.AddRow(new Rule(), new Rule(), new Rule());
-        table.AddRow("Barbie Mágica", "Hechizo de Teletransportación", "Se teletransporta aleatoriamente a otra casilla.");
+        table.AddRow("Stacie Detective", "Crystal Spell", "Teleports randomly to another cell.");
         table.AddRow(new Rule(), new Rule(), new Rule());
-        table.AddRow("Chelsea Exploradora", "Rayo Veloz", "Permite moverse el doble de la velocidad durante 1 turno.");
+        table.AddRow("Chelsea Explorer", "Speed Ray", "Allows double speed movement for 1 turn.");
 
         AnsiConsole.Write(table);
         Console.WriteLine("");
-        // Opciones del menú
-        List<string> choices = new List<string>() { "Barbie Estrella", "Ken Aventurero", "Skipper Inventora", "Barbie Mágica", "Chelsea Exploradora" };
+        // Menu options
+        List<string> choices = new List<string>() { "Barbie Star", "Ken Adventurer", "Skipper Inventor", "Stacie Detective", "Chelsea Explorer" };
         foreach (var piece in selectedPiece)
         {
             choices.Remove(piece.Name);
         }
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title($"{name}, selecciona una ficha para jugar:")
+            .Title($"{name}, Select a piece to play:")
             .AddChoices(choices.ToArray()));
 
-        AnsiConsole.MarkupLine($"Has seleccionado la ficha: [bold]{option}[/]");
+        AnsiConsole.MarkupLine($"{name} has selected: [bold]{option}[/]");
 
-
-
-        // Manejo de las opciones seleccionadas
+        // Handle selected options
         switch (option)
         {
-            case "Barbie Estrella":
-                return new Piece("Barbie Estrella", 500, new Skill("Salto Estelar", 3, "Permite saltar sobre un obstáculo o trampa, moviéndose hasta 2 casillas adicionales en línea recta."), "👩", 2);
-            case "Ken Aventurero":
-                return new Piece("Ken Aventurero", 3, new Skill("Gancho de Aventurero", 4, "Lanza un gancho para moverse a cualquier casilla en línea recta dentro de un radio de 5 casillas, ignorando obstáculos."), "👨", 2);
-            case "Skipper Inventora":
-                return new Piece("Skipper Inventora", 2, new Skill("Trampa Inversa", 2, "Convierte una trampa en una casilla de beneficio (por ejemplo, otorga un movimiento extra) durante 1 turno."), "👩‍🔧", 2);
-            case "Barbie Mágica":
-                return new Piece("Barbie Mágica", 3, new Skill("Bola de Cristal", 5, "Invalida la habilidad de la ficha contraria durante el proximo turno."), "🧙‍♀️", 2);
-            case "Chelsea Exploradora":
-                return new Piece("Chelsea Exploradora", 5, new Skill("Rayo Veloz", 3, "Permite moverse el doble de la velocidad durante 1 turno, pero no se pueden usar habilidades en ese turno."), "👧", 2);
+            case "Barbie Star":
+                return new Piece("Barbie Star", 10, new Skill("Star Glow", 3, "Allows jumping over obstacles or traps, moving up to 2 additional cells in a straight line."), "👩", 2);
+            case "Ken Adventurer":
+                return new Piece("Ken Adventurer", 3, new Skill("Protective Shield", 4, "Launches a hook to move to any cell in a straight line within a 5-cell radius, ignoring obstacles."), "👨", 2);
+            case "Skipper Inventor":
+                return new Piece("Skipper Inventor", 2, new Skill("Reversible Drone", 2, "Converts a trap into a benefit cell (e.g., grants an extra move) for 1 turn."), "👩‍🔧", 2);
+            case "Stacie Detective":    
+                return new Piece("Stacie Detective", 3, new Skill("Crystal Spell", 5, "Teleports randomly to another cell"), "🧙‍♀️", 2);
+            case "Chelsea Explorer":
+                return new Piece("Chelsea Explorer", 5, new Skill("Speed Ray", 3, "Allows double speed movement for 1 turn, but abilities cannot be used during that turn."), "👧", 2);
             default:
                 return ShowMenu(name, selectedPiece);
         }

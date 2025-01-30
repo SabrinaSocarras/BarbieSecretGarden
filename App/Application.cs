@@ -52,7 +52,11 @@ public class Application
                 AnsiConsole.Markup($"[bold pink1]Turno de {game.CurrenPlayer.Name}[/]");
                 Movement(game.CurrenPlayer.Piece);
             }
-            game.ChangePlayer();
+            if (!game.Winner())
+            {
+                game.ChangePlayer();
+            }
+
         }
         VictoryMenu.ShowVictoryMenu(game.CurrenPlayer.Name);
     }
@@ -60,29 +64,23 @@ public class Application
     {
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title($"Selecciona una opción {game.CurrenPlayer.Name}:")
+                .Title($"Select an option {game.CurrenPlayer.Name}:")
                 .AddChoices(new[] {
-                    "Mover", "Activar" , "Salir del juego",
+                    "Move", "Activate the skill", "Exit game",
                 }));
 
-        // Manejo de las opciones seleccionadas
         switch (option)
         {
-            case "Mover":
+            case "Move":
                 return PlayerAction.Mover;
-            case "Activar habilidad":
+            case "Activate the skill":
                 return PlayerAction.Activar;
-            case "Salir del juego":
+            case "Exit game":
                 return PlayerAction.Salir;
             default:
                 return PrintActions();
         }
 
-
-    }
-    private void ShowMassage(string massage) //creando un metodo para no tener que repetir tanto Console.WriteLine 
-    {
-        System.Console.WriteLine(massage);
     }
     public void Movement(Piece piece)
     {
@@ -98,7 +96,7 @@ public class Application
                 if (game.IsInStayInPlace(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
                 {
                     Console.WriteLine("");
-                    AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} se queda en el lugar hasta el siguiente turno![/]");
+                    AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} stays in place until next turn.[/]");
                     Thread.Sleep(2000);
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                     break;
@@ -113,6 +111,8 @@ public class Application
                             speed--;
                             Console.Clear();
                             PrintBoard();
+                            Console.WriteLine("");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.DownArrow:
@@ -122,6 +122,8 @@ public class Application
                             speed--;
                             Console.Clear();
                             PrintBoard();
+                            Console.WriteLine("");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.LeftArrow:
@@ -131,6 +133,8 @@ public class Application
                             speed--;
                             Console.Clear();
                             PrintBoard();
+                            Console.WriteLine("");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.RightArrow:
@@ -140,6 +144,8 @@ public class Application
                             speed--;
                             Console.Clear();
                             PrintBoard();
+                            Console.WriteLine("");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.Escape:

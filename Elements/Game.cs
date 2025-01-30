@@ -15,7 +15,7 @@ public class Game
 
     public bool Winner()
     {
-        return Players[0].Piece.X == Board.Exit.X && Players[0].Piece.Y == Board.Exit.Y;
+        return CurrenPlayer.Piece.X == Board.Exit.X && CurrenPlayer.Piece.Y == Board.Exit.Y;
     }
 
     public bool IsInStayInPlace(int x, int y)

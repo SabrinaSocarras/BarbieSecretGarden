@@ -7,7 +7,7 @@ public static class PlayerName
     {
         // Solicitar el nombre del jugador
 
-        var name = AnsiConsole.Ask<string>($"Ingresa el nombre del jugador {number}:");
+        var name = AnsiConsole.Ask<string>($"Enter player {number} name:");
 
         return name;
     }

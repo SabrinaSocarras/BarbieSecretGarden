@@ -5,10 +5,10 @@ public static class MainMenu
 {
     public static void ShowMenu()
     {
-        // Título "Barbie" en grande y rosado
-        AnsiConsole.MarkupLine("[bold pink1]Welcome to the Secret Garden of Barbie[/]");
+        // "Barbie" title in large and pink
+        AnsiConsole.MarkupLine("[bold pink1]Welcome to Barbie's Maze[/]");
 
-        // Opciones del menú
+        // Menu options
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Select an option:")
@@ -16,17 +16,17 @@ public static class MainMenu
                     "New Game", "Instructions", "Exit"
                 }));
         Console.Clear();
-        // Manejo de las opciones seleccionadas
+        // Handle selected options
         switch (option)
         {
             case "New Game":
-                AnsiConsole.MarkupLine("Starting new game...");
+                AnsiConsole.MarkupLine("Starting the game...");
                 break;
             case "Instructions":
-                AnsiConsole.MarkupLine("Here are the game instructions.");
+                AnsiConsole.MarkupLine("Here are the instructions.");
                 break;
             case "Exit":
-                AnsiConsole.MarkupLine("Exiting game...");
+                AnsiConsole.MarkupLine("Exiting the game...");
                 Console.Clear();
                 Environment.Exit(0);
                 break;

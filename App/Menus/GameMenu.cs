@@ -13,7 +13,7 @@ public class GameMenu
         // Opciones del menú
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Elige la cantidad de jugadores:")
+                .Title("Choose number of players:")
                 .AddChoices(new[] {
                     "2", "3", "4"
                 }));
@@ -22,15 +22,15 @@ public class GameMenu
         switch (option)
         {
             case "2":
-                AnsiConsole.MarkupLine("Ha seleccionado 2 jugadores");
+                AnsiConsole.MarkupLine("Selected 2 players");
                 Players = 2;
                 break;
             case "3":
-                AnsiConsole.MarkupLine("Ha seleccionado 3 jugadores");
+                AnsiConsole.MarkupLine("Selected 3 players");
                 Players = 3;
                 break;
             case "4":
-                AnsiConsole.MarkupLine("Ha seleccionado 4 jugadores");
+                AnsiConsole.MarkupLine("Selected 4 players");
                 Players = 4;
                 break;
         }

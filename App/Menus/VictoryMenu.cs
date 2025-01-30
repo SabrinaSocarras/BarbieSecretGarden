@@ -6,36 +6,36 @@ public static class VictoryMenu
 {
     public static void ShowVictoryMenu(string winnerName)
     {
-        // Limpiar la consola
+        // Clear console
         Console.Clear();
 
-        // Mostrar un mensaje de victoria con estilo
+        // Show victory message with style
         AnsiConsole.Write(
-            new FigletText($"¡{winnerName} gana!")
+            new FigletText($"{winnerName} wins!")
                 .Centered()
                 .Color(Color.Gold1)
         );
 
-        AnsiConsole.MarkupLine("[bold green]🎉 ¡Felicidades! 🎉[/]");
-        AnsiConsole.MarkupLine($"[bold yellow]{winnerName}[/] ha logrado escapar del laberinto.");
+        AnsiConsole.MarkupLine("[bold green]🎉 Congratulations! 🎉[/]");
+        AnsiConsole.MarkupLine($"[bold yellow]{winnerName}[/] has escaped from the maze.");
 
-        // Crear un menú con opciones
+        // Create a menu with options
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("[bold cyan]¿Qué deseas hacer ahora?[/]")
+                .Title("[bold cyan]What would you like to do now?[/]")
                 .PageSize(3)
                 .AddChoices(new[]
                 {
-                    "Volver al menú principal",
-                    "Salir"
+                    "Return to main menu",
+                    "Exit"
                 })
         );
 
-        // Manejar la opción seleccionada
+        // Handle the selected option
         switch (choice)
         {
-            case "Volver al menú principal":
-                AnsiConsole.MarkupLine("[bold green]Volviendo al menú principal...[/]");
+            case "Return to main menu":
+                AnsiConsole.MarkupLine("[bold green]Returning to main menu...[/]");
                 Console.Clear();
                 MainMenu.ShowMenu();
                 GameMenu gameMenu = new GameMenu();
@@ -43,9 +43,10 @@ public static class VictoryMenu
                 app.Start(gameMenu.Players);
                 break;
 
-            case "Salir":
-                AnsiConsole.MarkupLine("[bold red]Saliendo del juego...[/]");
-                Environment.Exit(0); // Cierra la aplicación
+            case "Exit":
+                AnsiConsole.MarkupLine("[bold red]Exiting game...[/]");
+                Console.Clear();
+                Environment.Exit(0); 
                 break;
         }
     }
