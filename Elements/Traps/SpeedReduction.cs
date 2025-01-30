@@ -7,9 +7,5 @@ namespace AtrapaABarbie
             Type = CellType.SpeedReduction;
             Description = "Reduce speed by the half of youur moves.";
         }
-        public override void Execute(Game game)
-        {
-            game.CurrenPlayer.Piece.Speed = game.CurrenPlayer.Piece.Speed / 2;
-        }
     }
 }

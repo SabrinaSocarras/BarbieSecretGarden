@@ -98,7 +98,7 @@ public class Application
                 {
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} stays in place until next turn.[/]");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(4000);
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                     break;
                 }
@@ -107,7 +107,7 @@ public class Application
                     speed /= 2;
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has a speed reduction trap.[/]");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(4000);
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                     break;
                 }
@@ -116,7 +116,7 @@ public class Application
                 {
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has fallen into a trap and returns to the start.[/]");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(4000);
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                     game.CurrenPlayer.Piece.X = game.Board.Start.X;
                     game.CurrenPlayer.Piece.Y = game.Board.Start.Y;
@@ -192,7 +192,7 @@ public class Application
                 {
                     if (player.Piece.X == i && player.Piece.Y == j)
                     {
-                        AnsiConsole.Markup($"[black]██[/]");
+                        AnsiConsole.Markup($"[black]🌟[/]");
                         
                         playerInCell = true;
                         break;
@@ -203,15 +203,15 @@ public class Application
                 {
                     if (game.Board.Cells[i, j].Type == CellType.Wall)
                     {
-                        AnsiConsole.Markup("[green]██[/]");
+                        AnsiConsole.Markup("[green]🌳[/]");
                     }
                     else if (game.Board.Cells[i, j].Type == CellType.Final)
                     {
-                        AnsiConsole.Markup("[blue]||[/]");
+                        AnsiConsole.Markup("[black]🌷[/]");
                     }
                     else if (game.Board.Cells[i, j].Type == CellType.SpeedReduction || game.Board.Cells[i, j].Type == CellType.ReturnToStart || game.Board.Cells[i, j].Type == CellType.StayInPlace )
                     {
-                        AnsiConsole.Markup("[red]██[/]");
+                        AnsiConsole.Markup("[red]🚨[/]");
                     }
                     else
                     {

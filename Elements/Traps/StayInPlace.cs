@@ -7,8 +7,4 @@ public class StayInPlace :Trap
         Type = CellType.StayInPlace;
         Description = "Lose all piece speed";
     }
-    public override void Execute(Game game)
-    {
-        game.CurrenPlayer.Piece.Speed = 0;
-    }
 }

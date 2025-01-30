@@ -4,8 +4,14 @@ public class SpeedRay : Skill
 {
     public SpeedRay()
     {
+        Name = "Speed Ray"; 
         Type = SkillType.SpeedRay;
-        Description = "The current player can move up to 3 additional cells in a straight line.";
+        Description = "Allows double speed movement for the next turn.";
+    }
+
+    public override void Execute (Game game)
+    {
+        game.CurrenPlayer.Piece.Speed *= 2;
     }
 }
   

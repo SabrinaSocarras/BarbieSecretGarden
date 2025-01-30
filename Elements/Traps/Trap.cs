@@ -6,5 +6,4 @@ public class Trap
 
     public string Description {get; set; } = string.Empty;
 
-    public virtual void Execute(Game game){ }
 }
