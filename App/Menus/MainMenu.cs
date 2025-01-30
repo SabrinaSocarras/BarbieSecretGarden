@@ -11,22 +11,22 @@ public static class MainMenu
         // Opciones del menú
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Selecciona una opción:")
+                .Title("Select an option:")
                 .AddChoices(new[] {
-                    "Nueva partida", "Instrucciones", "Salir"
+                    "New Game", "Instructions", "Exit"
                 }));
-
+        Console.Clear();
         // Manejo de las opciones seleccionadas
         switch (option)
         {
-            case "Nueva partida":
-                AnsiConsole.MarkupLine("Iniciando nueva partida...");
+            case "New Game":
+                AnsiConsole.MarkupLine("Starting new game...");
                 break;
-            case "Instrucciones":
-                AnsiConsole.MarkupLine("Aquí van las instrucciones del juego.");
+            case "Instructions":
+                AnsiConsole.MarkupLine("Here are the game instructions.");
                 break;
-            case "Salir":
-                AnsiConsole.MarkupLine("Saliendo del juego...");
+            case "Exit":
+                AnsiConsole.MarkupLine("Exiting game...");
                 Console.Clear();
                 Environment.Exit(0);
                 break;

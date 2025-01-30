@@ -11,26 +11,4 @@ public struct Cell
     public int Y { get; set; }
     public CellType Type { get; set; } = CellType.None;
 
-    public override string ToString()
-    {
-        switch (Type)
-        {
-            case CellType.None:
-                return " ";
-            case CellType.Final:
-                return "*";
-            case CellType.ReturnToStart:
-                return "R";
-            case CellType.StayInPlace:
-                return "S";
-            case CellType.Wall:
-                return "#";
-            case CellType.Path:
-                return " ";
-            case CellType.Start:
-                return "S";
-            default:
-                return " ";
-        }
-    }
 }

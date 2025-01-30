@@ -4,11 +4,11 @@ public class ReturnToStart : Trap
     public ReturnToStart()
     {
         Type = CellType.ReturnToStart;
-        Description = "If you are in this trap you return to the start";
+        Description = "Retorna al inicio";
     }
     public override void Execute(Game game)
     {
-        game.CurrenPlayer.Piece.X = 0;
-        game.CurrenPlayer.Piece.Y = 0;
+        game.CurrenPlayer.Piece.X = game.Board.Start.X;
+        game.CurrenPlayer.Piece.Y = game.Board.Start.Y;
     }
 }

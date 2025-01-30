@@ -1,52 +1,89 @@
+using Spectre.Console;
+using System.Threading;
+
 namespace AtrapaABarbie;
 
 public class Application
 {
     public Game game { get; set; } = null!;
-    public void Start()
+    public void Start(int cantPlayers)
     {
-        Board board = new Board(6);
-        Player player = new Player();
-        Game game = new Game();
-    }
-    public string PlayGame()
-    {
-        do
+        Board board = new Board(31);
+        List<Piece> pieces = new List<Piece>();
+        List<Player> players = new List<Player>();
+        for (int i = 0; i < cantPlayers; i++)
         {
+            Player player = new Player();
+            player.Name = PlayerName.GetName(i + 1);
+            PieceSelector pieceSelector = new PieceSelector();
+            player.Piece = pieceSelector.ShowMenu(player.Name, pieces);
+            pieces.Add(player.Piece);
+            Console.WriteLine("");
+            player.Piece.X = board.Start.X;
+            player.Piece.Y = board.Start.Y;
+            players.Add(player);
+        }
+
+        game = new Game(board, players.ToArray());
+        game.CurrenPlayer = game.Players[0];
+        PlayGame();
+    }
+    public void PlayGame()
+    {
+        while (!game.Winner())
+        {
+            Console.Clear();
+            PrintBoard();
+            Console.WriteLine("");
+            Console.WriteLine("");
             PlayerAction action = PrintActions();
             if (action == PlayerAction.Activar)
             {
                 Skill skill = game.CurrenPlayer.Piece.Skill;
                 // game.CurrenPlayer.Piece.Skills[skill].Execute(game);
             }
-        } while (!game.Winner()); // se repetira el ciclo hasta que uno de los dos jugadores gane 
-        return $"The Winner is {game.CurrenPlayer.Name}";
+            else if (action == PlayerAction.Salir)
+            {
+                Console.Clear();
+                Environment.Exit(0);
+            }
+            else
+            {
+                AnsiConsole.Markup($"[bold pink1]Turno de {game.CurrenPlayer.Name}[/]");
+                Movement(game.CurrenPlayer.Piece);
+            }
+            game.ChangePlayer();
+        }
+        VictoryMenu.ShowVictoryMenu(game.CurrenPlayer.Name);
     }
     private PlayerAction PrintActions()
     {
-        ShowMassage("Elige una opcion");
-        ShowMassage("M: Mover");
-        ShowMassage("A: Activar");
-        return GetAction();
-    }
-    private PlayerAction GetAction()
-    {
-        ConsoleKeyInfo consoleKey = Console.ReadKey();
-        switch (consoleKey.Key)
+        var option = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title($"Selecciona una opción {game.CurrenPlayer.Name}:")
+                .AddChoices(new[] {
+                    "Mover", "Activar" , "Salir del juego",
+                }));
+
+        // Manejo de las opciones seleccionadas
+        switch (option)
         {
-            case ConsoleKey.M:
+            case "Mover":
                 return PlayerAction.Mover;
-            case ConsoleKey.A:
+            case "Activar habilidad":
                 return PlayerAction.Activar;
+            case "Salir del juego":
+                return PlayerAction.Salir;
             default:
-                return GetAction();  //si elige otra opcion vuelve a llamar al metodo 
+                return PrintActions();
         }
+
+
     }
     private void ShowMassage(string massage) //creando un metodo para no tener que repetir tanto Console.WriteLine 
     {
         System.Console.WriteLine(massage);
     }
-
     public void Movement(Piece piece)
     {
         int speed = piece.Speed;
@@ -54,20 +91,60 @@ public class Application
         {
             while (speed > 0)
             {
+                if (game.Winner())
+                {
+                    break;
+                }
+                if (game.IsInStayInPlace(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
+                {
+                    Console.WriteLine("");
+                    AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} se queda en el lugar hasta el siguiente turno![/]");
+                    Thread.Sleep(2000);
+                    game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
+                    break;
+                }
                 ConsoleKeyInfo consoleKey = Console.ReadKey();
                 switch (consoleKey.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (piece.Movement(game, -1, 0)) { }
+                        if (piece.Movement(game, -1, 0))
+                        {
+                            game.CurrenPlayer.Piece.X -= 1;
+                            speed--;
+                            Console.Clear();
+                            PrintBoard();
+                        }
                         break;
                     case ConsoleKey.DownArrow:
-                        //Mover Abajo
+                        if (piece.Movement(game, 1, 0))
+                        {
+                            game.CurrenPlayer.Piece.X += 1;
+                            speed--;
+                            Console.Clear();
+                            PrintBoard();
+                        }
                         break;
                     case ConsoleKey.LeftArrow:
-                        //Mover Izquierda
+                        if (piece.Movement(game, 0, -1))
+                        {
+                            game.CurrenPlayer.Piece.Y -= 1;
+                            speed--;
+                            Console.Clear();
+                            PrintBoard();
+                        }
                         break;
                     case ConsoleKey.RightArrow:
-                        //Mover Derecha
+                        if (piece.Movement(game, 0, 1))
+                        {
+                            game.CurrenPlayer.Piece.Y += 1;
+                            speed--;
+                            Console.Clear();
+                            PrintBoard();
+                        }
+                        break;
+                    case ConsoleKey.Escape:
+                        Console.Clear();
+                        Environment.Exit(0);
                         break;
                     default:
                         break;
@@ -78,6 +155,44 @@ public class Application
     }
     public void PrintBoard()
     {
+        for (int i = 0; i < 31; i++)
+        {
+            for (int j = 0; j < 31; j++)
+            {
+                bool playerInCell = false;
+                foreach (var player in game.Players)
+                {
+                    if (player.Piece.X == i && player.Piece.Y == j)
+                    {
+                        AnsiConsole.Markup($"[black]█[/]");
+                        playerInCell = true;
+                        break;
+                    }
+                }
 
+                if (!playerInCell)
+                {
+                    if (game.Board.Cells[i, j].Type == CellType.Wall)
+                    {
+                        AnsiConsole.Markup("[green]█[/]");
+                    }
+                    else if (game.Board.Cells[i, j].Type == CellType.Final)
+                    {
+                        AnsiConsole.Markup("[blue]|[/]");
+                    }
+                    else if (game.Board.Cells[i, j].Type == CellType.StayInPlace || game.Board.Cells[i, j].Type == CellType.ReturnToStart)
+                    {
+                        AnsiConsole.Markup("[red]█[/]");
+                    }
+                    else
+                    {
+                        AnsiConsole.Markup("[bold pink1]█[/]");
+                    }
+
+                }
+                // dibujar a las fichas
+            }
+            AnsiConsole.WriteLine();
+        }
     }
 }

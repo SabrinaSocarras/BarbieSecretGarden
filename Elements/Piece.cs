@@ -2,7 +2,7 @@ namespace AtrapaABarbie;
 
 public class Piece
 {
-    public Piece(string name, int speed, Skill skill, string logo)
+    public Piece(string name, int speed, Skill skill, string logo, int time)
     {
         Logo = logo;
         Name = name;
@@ -10,6 +10,7 @@ public class Piece
         Speed = speed;
         _speed = speed;
         Skill = skill;
+        Time = time;
     }
 
     public string Name { get; private set; } = String.Empty;
@@ -23,9 +24,17 @@ public class Piece
     public int Y { get; set; }
     public bool Movement(Game game, int modX, int modY)
     {
-        //Validar que se pueda mover a las casilla [X + modX, Y + modY] 
-        Moved = true;
-        return Moved;
+        // comprobar que no se sale del tablero
+        if (X + modX < 0 || X + modX >= game.Board.Size || Y + modY < 0 || Y + modY >= game.Board.Size)
+        {
+            return false;
+        }
+        
+        if (game.Board.Cells[X + modX, Y + modY].Type == CellType.Wall)
+        {
+            return false;
+        }
+        return true;
     }
     public void SetOrigin()
     {

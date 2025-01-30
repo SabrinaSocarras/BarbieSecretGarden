@@ -1,6 +1,3 @@
-
-using System.Dynamic;
-
 namespace AtrapaABarbie;
 
 public class Board
@@ -18,31 +15,8 @@ public class Board
         GenerateMaze();
         GenerateExit();
         GenerateStart();
-        SetPieces();
-        GeneratePiece(new Piece("Barbie Estrella", 4, new Skill("Salto Estelar", 3, "Permite saltar sobre un obstáculo o trampa, moviéndose hasta 2 casillas adicionales en línea recta."), "👩"));
+        GenerateTraps();
 
-
-        // MakeBoardAccesible(); 
-
-    }
-
-    public string Cell(int x, int y)
-    {
-        return Cells[x, y].Type.ToString();
-    }
-
-    private void MakeBoardAccesible()
-    {
-        for (int i = 0; i < Size; i++)
-        {
-            for (int j = 0; j < Size; j++)
-            {
-                if (Cells[i, j].Type == CellType.Wall)
-                {
-                    Cells[i, j].Type = CellType.Path;
-                }
-            }
-        }
     }
 
     private void InitializeBoard()
@@ -117,8 +91,8 @@ public class Board
                         frontier.Add(n);
             }
         }
-        Console.WriteLine("Maze generated");
     }
+
 
     public void GenerateExit()
     {
@@ -151,44 +125,34 @@ public class Board
         piece.Y = Start.Y;
     }
 
-    public static void SetPieces()
+    public void GenerateTraps()
+    {
+        int traps = 2;
+        for (int i = 0; i < traps; i++)
         {
-            // Crear habilidades para las fichas con sus descripciones
-            var saltoEstelar = new Skill("Salto Estelar", 3, "Permite saltar sobre un obstáculo o trampa, moviéndose hasta 2 casillas adicionales en línea recta.");
+            int x = rand.Next(0, Size);
+            int y = rand.Next(0, Size);
+            while (Cells[x, y].Type == CellType.Wall || Cells[x, y].Type == CellType.Start || Cells[x, y].Type == CellType.Final)
+            {
+                x = rand.Next(0, Size);
+                y = rand.Next(0, Size);
+            }
 
-            var ganchoAventurero = new Skill("Gancho de Aventurero", 4, "Lanza un gancho para moverse a cualquier casilla en línea recta dentro de un radio de 5 casillas, ignorando obstáculos.");
-
-            var trampaInversa = new Skill("Trampa Inversa", 2, "Convierte una trampa en una casilla de beneficio (por ejemplo, otorga un movimiento extra) durante 1 turno.");
-
-            var bolaCristal = new Skill("Bola de Cristal", 5, "Invalida la habilidad de la ficha contraria durante el proximo turno.");
-
-            var rayoVeloz = new Skill("Rayo Veloz", 3, "Permite moverse el doble de la velocidad durante 1 turno, pero no se pueden usar habilidades en ese turno.");
-
-            // Crear las fichas con sus habilidades
-            // var barbieEstrella = new Piece("Barbie Estrella", 4, saltoEstelar);
-            // var kenAventurero = new Piece("Ken Aventurero", 3, ganchoAventurero);
-            // var skipperInventora = new Piece("Skipper Inventora", 2, trampaInversa);
-            // var barbieMagica = new Piece("Barbie Mágica", 3, bolaCristal);
-            // var chelseaExploradora = new Piece("Chelsea Exploradora", 5, rayoVeloz);
-
-            // Mostrar información de las fichas creadas
-            // Console.WriteLine("Fichas creadas:");
-            // Console.WriteLine("----------------");
-            // DisplayPieceInfo(barbieEstrella);
-            // DisplayPieceInfo(kenAventurero);
-            // DisplayPieceInfo(skipperInventora);
-            // DisplayPieceInfo(barbieMagica);
-            // DisplayPieceInfo(chelseaExploradora);
+            Cells[x, y].Type = CellType.StayInPlace;
         }
-
-        public static void DisplayPieceInfo(Piece piece)
+        for (int i = 0; i < traps; i++)
         {
-            Console.WriteLine($"Nombre: {piece.Name}");
-            Console.WriteLine($"Velocidad: {piece.Speed}");
-            Console.WriteLine("Habilidades:");
-            Console.WriteLine($"- {piece.Skill.Name} (Enfriamiento: {piece.Skill.Cooldown} turnos)");
-            Console.WriteLine($"  Descripción: {piece.Skill.Description}");
-            Console.WriteLine("----------------");
+            int x = rand.Next(0, Size);
+            int y = rand.Next(0, Size);
+            while (Cells[x, y].Type == CellType.Wall || Cells[x, y].Type == CellType.Start || Cells[x, y].Type == CellType.Final || Cells[x, y].Type == CellType.StayInPlace)
+            {
+                x = rand.Next(0, Size);
+                y = rand.Next(0, Size);
+            }
+
+            Cells[x, y].Type = CellType.ReturnToStart;
         }
+    }
+
 
 }

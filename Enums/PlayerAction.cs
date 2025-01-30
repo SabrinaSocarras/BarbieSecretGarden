@@ -2,5 +2,5 @@ namespace AtrapaABarbie;
 
 public enum PlayerAction
 {
-    Mover, Activar
+    Mover, Activar, Salir 
 }

@@ -5,7 +5,7 @@ public class StayInPlace :Trap
     public StayInPlace()
     {
         Type = CellType.StayInPlace;
-        Description = "If you are in this trap you will stay there and wait for the other round";
+        Description = "Pierdes toda la velocidad de la ficha";
     }
     public override void Execute(Game game)
     {
