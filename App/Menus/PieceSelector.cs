@@ -5,6 +5,7 @@ public class PieceSelector
 {
     public Piece ShowMenu(string name, List<Piece> selectedPiece)
     {
+        AnsiConsole.MarkupLine($"[bold]{name}[/], read the description below :");
         Console.WriteLine("");
         var table = new Table()
                .Border(TableBorder.Heavy)
@@ -32,7 +33,7 @@ public class PieceSelector
         }
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title($"{name}, Select a piece to play:")
+            .Title("And select a piece to play:")
             .AddChoices(choices.ToArray()));
 
         AnsiConsole.MarkupLine($"{name} has selected: [bold]{option}[/]");

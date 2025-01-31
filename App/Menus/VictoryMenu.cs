@@ -17,7 +17,7 @@ public static class VictoryMenu
         );
 
         AnsiConsole.MarkupLine("[bold green]🎉 Congratulations! 🎉[/]");
-        AnsiConsole.MarkupLine($"[bold yellow]{winnerName}[/] has escaped from the maze.");
+        AnsiConsole.MarkupLine($"[bold yellow]{winnerName}[/] has colect the tulip!.");
 
         // Create a menu with options
         var choice = AnsiConsole.Prompt(

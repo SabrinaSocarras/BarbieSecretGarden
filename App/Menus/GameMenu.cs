@@ -34,5 +34,6 @@ public class GameMenu
                 Players = 4;
                 break;
         }
+        Console.WriteLine("");
     }
 }
