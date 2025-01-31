@@ -1,6 +1,6 @@
 using System;
 using Spectre.Console;
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 public class PieceSelector
 {
     public Piece ShowMenu(string name, List<Piece> selectedPiece)

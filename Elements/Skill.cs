@@ -1,7 +1,7 @@
 using System;
-using AtrapaABarbie;
+using BarbieSecretGarden;
 
-namespace AtrapaABarbie
+namespace BarbieSecretGarden
 {
     public class Skill
     {

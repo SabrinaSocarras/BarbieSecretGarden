@@ -1,7 +1,7 @@
 using Spectre.Console;
 using System.Threading;
 
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 
 public class Application
 {

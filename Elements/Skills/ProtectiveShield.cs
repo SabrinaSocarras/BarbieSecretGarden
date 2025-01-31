@@ -1,6 +1,6 @@
 using Spectre.Console;
 
-namespace AtrapaABarbie
+namespace BarbieSecretGarden
 {
     public class ProtectiveShield : Skill
     {

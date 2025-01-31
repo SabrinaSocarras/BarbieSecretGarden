@@ -1,4 +1,4 @@
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 
 public class Player
 {

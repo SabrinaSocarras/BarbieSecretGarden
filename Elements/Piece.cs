@@ -1,4 +1,4 @@
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 
 public class Piece
 {
@@ -10,6 +10,7 @@ public class Piece
         Speed = speed;
         _speed = speed;
         Skill = skill;
+        
     }
 
     public string Name { get; private set; } = String.Empty;
@@ -20,6 +21,7 @@ public class Piece
     public bool Moved { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
+    public int Time = 0;
     public bool Movement(Game game, int modX, int modY)
     {
         // comprobar que no se sale del tablero

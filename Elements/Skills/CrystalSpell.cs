@@ -1,6 +1,6 @@
 using System.Transactions;
 
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 
 public class CrystalSpell : Skill
 {

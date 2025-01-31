@@ -1,6 +1,6 @@
 using System;
 using Spectre.Console;
-namespace AtrapaABarbie;
+namespace BarbieSecretGarden;
 public static class PlayerName
 {
     public static string GetName(int number)
