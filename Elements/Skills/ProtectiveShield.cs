@@ -61,6 +61,7 @@ namespace BarbieSecretGarden
                 default:
                     AnsiConsole.Markup("[red]Invalid direction selected.[/]");
                     break;
+                    //falta que se ponga en la posicion que le corresponde 
             }
         }
     }

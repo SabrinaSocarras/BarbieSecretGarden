@@ -9,8 +9,6 @@ public class ReversibleDrone : Skill
     }
     public override void Execute(Game game)
     {
-    
-       
-    }
 
-}
+
+    }} 

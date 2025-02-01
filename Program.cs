@@ -41,6 +41,7 @@ public static class Program
         GameMenu gameMenu = new GameMenu();
         Application app = new Application();
         app.Start(gameMenu.Players);
+        
     }
 
 }
