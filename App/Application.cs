@@ -39,9 +39,9 @@ public class Application
             PlayerAction action = PrintActions();
             if (action == PlayerAction.Activar)
             {
-                game.CurrenPlayer.Piece.time = game.CurrenPlayer.Piece.Skill.Cooldown;  
+                game.CurrenPlayer.Piece.time = game.CurrenPlayer.Piece.Skill.Cooldown;
                 game.CurrenPlayer.Piece.Skill.Execute(game);
-                Console.WriteLine($"{game.CurrenPlayer.Name} has activated their skill {game.CurrenPlayer.Piece.Skill.Name}.");
+                AnsiConsole.Markup($"{game.CurrenPlayer.Name} has activated their skill {game.CurrenPlayer.Piece.Skill.Name}.");
                 Thread.Sleep(2000);
                 action = PlayerAction.Mover;
             }
@@ -66,11 +66,14 @@ public class Application
     private PlayerAction PrintActions()
     {
         List<string> options = new List<string>() { "Move", "Activate the skill", "Exit game" };
-        if(game.CurrenPlayer.Piece.time != 0)
+        if (game.CurrenPlayer.Piece.time != 0)
         {
+            game.CurrenPlayer.Piece.time -= 1;
             options.Remove("Activate the skill");
             AnsiConsole.WriteLine($"¡{game.CurrenPlayer.Name} has used your ability before so can't use it now.");
         }
+
+
         var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title($"Select an option {game.CurrenPlayer.Name}:")
@@ -92,15 +95,15 @@ public class Application
     }
     public void Movement(Piece piece)
     {
-        if(game.CurrenPlayer.Piece.time != 0)
+        if (game.CurrenPlayer.Piece.time != 0)
         {
             game.CurrenPlayer.Piece.time -= 1;
             Thread.Sleep(2000);
         }
-        int speed = piece.Speed;
+        piece.speed = piece.Speed;
         if (!piece.Moved)
         {
-            while (speed > 0)
+            while (piece.speed > 0)
             {
                 if (game.Winner())
                 {
@@ -116,14 +119,14 @@ public class Application
                 }
                 if (game.HasSpeedReduction(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
                 {
-                    speed /= 2;
+                    piece.Speed /= 2;
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has fallen into a speed reduction trap.Now you have the half of your moves.[/]");
                     Thread.Sleep(4000);
                     game.Board.Cells[game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y].Type = CellType.Path;
                 }
 
-                if(game.hasReturnToStart(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
+                if (game.hasReturnToStart(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
                 {
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has fallen into a trap and returns to the start.[/]");
@@ -141,44 +144,44 @@ public class Application
                         if (piece.Movement(game, -1, 0))
                         {
                             game.CurrenPlayer.Piece.X -= 1;
-                            speed--;
+                            piece.speed--;
                             Console.Clear();
                             PrintBoard();
                             Console.WriteLine("");
-                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {piece.speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.DownArrow:
                         if (piece.Movement(game, 1, 0))
                         {
                             game.CurrenPlayer.Piece.X += 1;
-                            speed--;
+                            piece.speed--;
                             Console.Clear();
                             PrintBoard();
                             Console.WriteLine("");
-                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {piece.speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.LeftArrow:
                         if (piece.Movement(game, 0, -1))
                         {
                             game.CurrenPlayer.Piece.Y -= 1;
-                            speed--;
+                            piece.speed--;
                             Console.Clear();
                             PrintBoard();
                             Console.WriteLine("");
-                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {piece.speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.RightArrow:
                         if (piece.Movement(game, 0, 1))
                         {
                             game.CurrenPlayer.Piece.Y += 1;
-                            speed--;
+                            piece.speed--;
                             Console.Clear();
                             PrintBoard();
                             Console.WriteLine("");
-                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {speed} moves left. [/]");
+                            AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has {piece.speed} moves left. [/]");
                         }
                         break;
                     case ConsoleKey.Escape:
@@ -203,8 +206,8 @@ public class Application
                 {
                     if (player.Piece.X == i && player.Piece.Y == j)
                     {
-                        AnsiConsole.Markup($"[black]{game.CurrenPlayer.Piece.Logo}[/]");
-                        
+                        AnsiConsole.Markup($"[black]{player.Piece.Logo}[/]");
+
                         playerInCell = true;
                         break;
                     }
@@ -220,13 +223,13 @@ public class Application
                     {
                         AnsiConsole.Markup("[black]🌷[/]");
                     }
-                    else if (game.Board.Cells[i, j].Type == CellType.ReturnToStart || game.Board.Cells[i, j].Type == CellType.StayInPlace )
+                    else if (game.Board.Cells[i, j].Type == CellType.ReturnToStart || game.Board.Cells[i, j].Type == CellType.StayInPlace)
                     {
                         AnsiConsole.Markup("[bold pink1]██[/]");
                     }
-                    else if (game.Board.Cells[i,j].Type == CellType.SpeedReduction)
+                    else if (game.Board.Cells[i, j].Type == CellType.SpeedReduction)
                     {
-                            AnsiConsole.Markup("[bold pink1]██[/]");
+                        AnsiConsole.Markup("[bold pink1]██[/]");
                     }
                     else
                     {
@@ -234,7 +237,7 @@ public class Application
                     }
 
                 }
-                // dibujar a las fichas
+               
             }
             AnsiConsole.WriteLine();
         }

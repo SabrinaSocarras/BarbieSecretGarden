@@ -9,6 +9,7 @@ public class CrystalSpell : Skill
     Name = "Crystal Spell";
     Type = SkillType.CrystalSpell;
     Description = "The current player can teleport randomly to another cell.";
+    Cooldown = 2;
   }
   public override void Execute(Game game)
   {

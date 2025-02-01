@@ -128,7 +128,7 @@ public class Board
     public void GenerateTraps()
     {
         int traps = 10;
-        for (int i = 0; i < traps; i++)
+        for (int i = 0; i <= traps; i++)
         {
             int x = rand.Next(0, Size);
             int y = rand.Next(0, Size);

@@ -1,3 +1,5 @@
+using Spectre.Console;
+
 namespace BarbieSecretGarden;
 
 public class SpeedRay : Skill
@@ -7,21 +9,14 @@ public class SpeedRay : Skill
         Name = "Speed Ray";
         Type = SkillType.SpeedRay;
         Description = "Allows double speed movement for the next turn.";
+        Cooldown = 2;
     }
 
     public override void Execute(Game game)
     {
-        if (!Used)
-        {
-
-            game.CurrenPlayer.Piece.Speed *= 2;
-            Used = true;
-            Console.WriteLine($"{game.CurrenPlayer.Name} ha usado {Name}. ¡Ahora puede moverse el doble de distancia!");
-        }
-        else
-        {
-            Console.WriteLine("La habilidad ya ha sido usada en este turno.");
-        }
+        game.CurrenPlayer.Piece.Speed*= 2;
+       
+        Thread.Sleep(2000);
     }
 }
 

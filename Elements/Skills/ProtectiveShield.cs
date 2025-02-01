@@ -8,6 +8,7 @@ namespace BarbieSecretGarden
         {
             Type = SkillType.ProtectiveShield;
             Description = "Allows movement in a 5-cell straight line radius.";
+            Cooldown = 2;
         }
 
         public override void Execute(Game game)

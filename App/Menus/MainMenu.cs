@@ -21,6 +21,8 @@ public static class MainMenu
                 new Markup(
                     "This is a fun game set in Barbie's secret garden,\n" + 
                     "where with the character you choose you must try to reach Barbie's favorite flower first: the pink tulip.\n\n" +
+                    "This is the path[bold pink1]██[/]\n" +
+                    "This is a wall [black]🌳[/]\n" +
                     "[underline]Controls:[/]\n" +
                     "• Use the [bold green]arrow keys[/] (↑, ↓, ←, →) to move around the board.\n" +
                     "• Press [bold red]ESC[/] at any time to exit the game.\n\n" +

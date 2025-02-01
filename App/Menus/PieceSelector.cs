@@ -13,11 +13,11 @@ public class PieceSelector
                .AddColumn(new TableColumn("[bold]Ability[/]").Centered())
                .AddColumn(new TableColumn("[bold]Description[/]").Centered());
 
-        table.AddRow("Barbie Star🌟", "Star Glow", "Allows jumping over an obstacle or trap.");
+        table.AddRow("Barbie Star🌟", "Star Glow", "Has 2 moves more in any direction .");
         table.AddRow(new Rule(), new Rule(), new Rule());
         table.AddRow("Ken Adventurer🌞", "Protective Shield", "Allows movement in a 5-cell straight line radius.");
         table.AddRow(new Rule(), new Rule(), new Rule());
-        table.AddRow("Skipper Inventor💡", "Reversible Drone", "Converts a trap into an extra turn.");
+        table.AddRow("Skipper Inventor💡", "Reversible Drone", "Can convert a trap into a path and continue playing.");
         table.AddRow(new Rule(), new Rule(), new Rule());
         table.AddRow("Stacie Detective🔍", "Crystal Spell", "Teleports randomly to another cell.");
         table.AddRow(new Rule(), new Rule(), new Rule());

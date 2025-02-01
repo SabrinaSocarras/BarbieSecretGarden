@@ -9,6 +9,7 @@ public class StarGlow : Skill
         Name = "Star Glow";
         Type = SkillType.StarGlow;
         Description = "Allows jumping over obstacles or traps, moving up to 2 additional cells";
+        Cooldown = 2;
     }
     public override void Execute(Game game)
     {

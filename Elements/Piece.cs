@@ -2,13 +2,13 @@ namespace BarbieSecretGarden;
 
 public class Piece
 {
-    public Piece(string name, int speed, Skill skill, string logo)
+    public Piece(string name, int speed1, Skill skill, string logo)
     {
         Logo = logo;
         Name = name;
         Logo = logo;
-        Speed = speed;
-        _speed = speed;
+        Speed = speed1;
+        speed = speed1;
         Skill = skill;
         
     }
@@ -16,7 +16,7 @@ public class Piece
     public string Name { get; private set; } = String.Empty;
     public string Logo { get; private set; }
     public int Speed { get; set; }
-    private int _speed { get; set; }
+    public int speed { get; set; }
     public Skill Skill { get; }
     public bool Moved { get; set; }
     public int X { get; set; }
@@ -36,10 +36,5 @@ public class Piece
         }
         return true;
     }
-    public void SetOrigin()
-    {
-        Speed = _speed;
-        Moved = false;
-        Skill.Used = false;
-    }
+    
 }
