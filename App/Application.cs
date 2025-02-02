@@ -119,7 +119,7 @@ public class Application
                 }
                 if (game.HasSpeedReduction(game.CurrenPlayer.Piece.X, game.CurrenPlayer.Piece.Y))
                 {
-                    piece.Speed /= 2;
+                    piece.speed /= 2;
                     Console.WriteLine("");
                     AnsiConsole.Markup($"[bold pink1]¡{game.CurrenPlayer.Name} has fallen into a speed reduction trap.Now you have the half of your moves.[/]");
                     Thread.Sleep(4000);
